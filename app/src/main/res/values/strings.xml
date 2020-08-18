@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AndroidH5</string>
+    <string name="edit_hint">请输入用户名</string>
+    <string name="btn1_text">无参无返回值调用H5</string>
+    <string name="btn2_text">无参有返回值调用H5</string>
+    <string name="btn3_text">有参无返回值调用H5</string>
+    <string name="btn4_text">有参有返回值调用H5</string>
+    <string name="btn5_text">H5无参调用Android</string>
+    <string name="btn6_text">H5有参调用Android</string>
+</resources>

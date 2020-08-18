@@ -1,0 +1,115 @@
+<!DOCTYPE  html>
+
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title></title>
+
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+
+    <link href="../css/common.css" rel="stylesheet"/>
+
+    <script src="../js/mui.min.js"></script>
+
+    <script type="text/javascript">
+
+        mui.init()
+
+
+
+    </script>
+
+</head>
+
+<body>
+<!--头部-->
+<header class="mui-bar mui-bar-nav" id="header">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">Android与H5交互</h1>
+</header>
+<div class="mui-content">
+
+    <button onclick="android1()" style="margin: 10px;">点击调用本地方法,无返回值</button>
+    <button onclick="android('+123+')" style="margin: 10px;">点击调用本地方法,有返回值</button>
+
+    <button type="button" id="button1" onclick="shouldUrl()" style="margin: 10px;">点击调用Android代码,shouldOverrideUrlLoading</button>
+    <button type="button" id="button2" onclick="clickPrompt()" style="margin: 10px;">点击调用Android代码,onJsPrompt</button>
+    <button type="button" id="button3" onclick="clickConfirm()" style="margin: 10px;">点击调用Android代码,onJsConfirm</button>
+    <button type="button" id="button4" onclick="clickAlert()" style="margin: 10px;">点击调用Android代码,onJsAlert</button>
+
+    <p id="p" style="padding: 10px;">显示结果</p>
+
+    <script type="text/javascript">
+
+    //Android调用：有参返回值的方法
+    function sum(a,b){
+        return a+b;
+    }
+
+    //Android调用：有参无返回值的方法
+    function showMsg(a){
+        document.getElementById("p").innerHTML=a;
+    }
+
+    //Android调用：无参有返回值的方法
+    function show(){
+        return "Android调H5的返回值"
+    }
+
+    //Android调用：无参无返回值的方法
+    function show1(){
+        //显示hello
+        document.getElementById("p").innerHTML="Android调了H5，无参无返回";
+    }
+
+    //H5 JS调用源生方法，有参有返回值
+    function android(num) {
+        //tag是webView.addJavascriptInterface(JsInterface(), "tag")保持一致
+        //h5GetBack()与Android中的方法保持一致
+        var result=window.tag.h5GetBack(num);
+        //将返回结果显示在id为p的控件上
+        document.getElementById("p").innerHTML=result;
+    }
+
+    //H5 JS调用源生方法，无参无返回值
+    function android1() {
+        //tag是webView.addJavascriptInterface(JsInterface(), "tag")保持一致
+        //h5Get()与Android中的方法保持一致
+        window.tag.h5Get();
+    }
+
+    function shouldUrl(){
+        /*约定的url协议为：test://webview?arg1=111&arg2=222*/
+        document.location = "test://webview?arg1=111&arg2=222";
+    }
+
+    function clickPrompt(){
+        // 调用prompt()
+        var result=prompt("test://webview?arg1=111&arg2=222");
+        alert("Prompt结果：" + result);
+    }
+
+    function clickConfirm(){
+        // 调用confirm()
+        var result=confirm("test://webview?arg1=111&arg2=222");
+        alert("Confirm结果：" + result);
+    }
+
+    function clickAlert(){
+         // 调用alert()
+         var result=alert("test://webview?arg1=111&arg2=222");
+    }
+
+
+    </script>
+</div>
+
+</body>
+
+</html>
